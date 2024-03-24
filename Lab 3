@@ -1,0 +1,62 @@
+using System;
+/* Вариант 6 : Поменять местами в одномерном массиве противоположные
+по знаку элементы (например 5.7 и -5.7), с учетом перестановки
+каждого элемента не более одного раза. */
+
+namespace Lab_3
+{
+    class Program
+    {
+        static void Print(int[] mas)
+        {
+            Console.Write("Массив: ");
+            for (int i = 0; i < mas.Length; i++)
+            {
+                Console.Write(mas[i] + "\t");
+            }
+            Console.WriteLine();
+        }
+
+        static void Main(string[] args)
+        {
+            int N = 8, temp = 0;
+            int[] mas = { -9, 3, 9, 9, -4, 4, -3, 4 };
+            int[] done = new int[N/2];
+
+            Console.WriteLine("Эта программа меняет местами противоположные по знаку элементы в массиве, причем так, что один элемент может быть изменен только один раз\n\n");
+
+            Print(mas);
+
+            for (int i = 0; i < N; i++)
+            {
+                temp = 0;
+                foreach (int item in done)
+                {
+                    if (i == item && i != 0)
+                    {
+                        temp = -1;
+                        break;
+                    }
+                }
+                if (temp == -1) continue;
+
+                for (int j = i + 1; j < N; j++)
+                {
+                    if (mas[i] == -mas[j])
+                    {
+                        temp = mas[i];
+                        mas[i] = mas[j];
+                        mas[j] = temp;
+                        temp = 0;
+
+                        while (done[temp] != 0) temp++;
+                        done[temp] = j;
+                        break;
+                    }
+                }
+            }
+
+            Print(mas);
+        }
+    }
+}
