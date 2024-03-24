@@ -1,0 +1,98 @@
+using System;
+
+//Проверка массива на палиндром, решить через цикл и рекурсию
+
+namespace Lab_5_2
+{
+    class Program
+    {
+        static int IsPalindromeRecursion(int[] mas, int N)
+        {
+            N--;
+            if (N == mas.Length / 2) return 1;
+            else if (mas[N] == mas[mas.Length - N - 1]) return IsPalindromeRecursion(mas, N);
+            else return 0;
+        }
+
+        static int IsPalendromeCycle(int[] mas)
+        {
+            for (int i = 0; i < mas.Length / 2; i++)
+            {
+                if (mas[i] != mas[mas.Length - i - 1]) return 0;
+            }
+            return 1;
+        }
+
+        static void PalindromeCycle(int[] mas)
+        {
+            int result = 0;
+
+            for (int i = 0; i < mas.Length; i++)
+            {
+                for (int j = i + 1; j < mas.Length; j++)
+                {
+                    if (mas[i] == mas[j])
+                    {
+                        result = 1;
+                        for (int k = 0; k < (j - i)+1 / 2; k++)
+                        {
+                            if (mas[i + k] != mas[j - k])
+                            {
+                                result = -1;
+                                break;
+                            }
+                        }
+                    }
+                    if (result == 1)
+                    {
+                        Console.Write("Палиндром: ");
+                        for (int k = i; k < j + 1; k++) Console.Write(mas[k] + " ");
+                        result = 0;
+
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            int N = 5;
+            int[] mas = new int[N];
+
+            do
+            {
+                Console.Clear();
+
+                Console.WriteLine($"Эта программа проверяет яляеться ли массив палиндромом.\nЗаполните массив из {N} элементов: ");
+
+                for (int i = 0; i < N; i++)
+                    mas[i] = int.Parse(Console.ReadLine());
+
+                Console.Clear();
+
+                Console.Write("Массив: ");
+                for (int i = 0; i < mas.Length; i++)
+                {
+                    Console.Write(mas[i] + " ");
+                }
+                Console.WriteLine();
+
+                Console.Write("Проверка рекурсией: ");
+                if (IsPalindromeRecursion(mas, N) == 1) Console.Write("этот массив палиндром\n");
+                else Console.Write("этот массив не палиндром\n");
+
+                Console.Write("Проверка циклом: ");
+                if (IsPalendromeCycle(mas) == 1) Console.Write("этот массив палиндром\n");
+                else Console.Write("этот массив не палиндром\n");
+
+                Console.WriteLine("\nПеречень существующих в массиве палиндромов: ");
+                PalindromeCycle(mas);
+
+                Console.Write("\n\n\nДля повтора нажмите Enter\nНажмите любую другую клавишу, чтобы выйти...");
+
+            } while (Console.ReadKey().Key == ConsoleKey.Enter);
+            
+        }
+    }
+}
