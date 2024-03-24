@@ -1,0 +1,46 @@
+using System;
+// Вариант 6 : Написать программу, которая введет 7 значений и посчитает количество чисел не равных 5 и меньших 7.
+namespace Lab_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            const int N = 7;
+            int less_than_7 = 0, not_equal_5 = 0, max = 10;
+            int[] mas = new int[N];
+            var rand = new Random();
+
+            do
+            {
+                less_than_7 = 0;
+                not_equal_5 = 0;
+
+                Console.Clear();
+
+                Console.WriteLine("Это реализация програмы, которая введет 7 значений и посчитает количество чисел не равных 5 и меньших 7.");
+
+                for (int i = 0; i < N; i++)
+                {
+
+                    mas[i] = rand.Next(max);
+
+                    if (mas[i] != 5) not_equal_5++;
+                    if (mas[i] < 7) less_than_7++;
+                }
+
+                Console.Write("Массив имеет вид: ");
+                for (int i = 0; i < N; i++)
+                {
+
+                    Console.Write(mas[i] + " ");
+
+                }
+                Console.WriteLine($"\nКол-во чисел не равных 5: {not_equal_5}\nКол-во чисел меньше 7: {less_than_7}\n");
+
+                Console.Write("\n\n\nДля повтора нажмите Enter\nНажмите любую другую клавишу, чтобы выйти...");
+
+            } while (Console.ReadKey().Key == ConsoleKey.Enter);
+        }
+    }
+}
