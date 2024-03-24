@@ -1,0 +1,35 @@
+using System;
+/* Вариант 6 : Предприниматель 1 марта открыл счет в банке, вложив 1000 руб. Через
+каждый месяц размер вклада увеличивается на 2% от имеющейся
+суммы. Определить прирост суммы вклада за первый, второй, ...,
+десятый месяц.
+ */
+namespace Lab_2_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int day = 1, month = 3, year = 24, percent = 2, months_from_deposit = 10;
+            decimal initial_deposit = 1000, deposit = initial_deposit, increment = 0;
+
+            Console.Write("Введите кол-во месяцев нахождения денег на депозите и программа выведет прирост к нему за каждый из месяцев.\nКол-во: ");
+            months_from_deposit = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"Дата вложения: {day}.{month}.{year}. На депозите {deposit} руб. Время содержания: {months_from_deposit} мес.\n");
+            for (int i = 0; i < months_from_deposit; i++)
+            {
+                deposit += deposit / 100 * percent;
+                increment = deposit - initial_deposit;
+                month++;
+                if (month == 12)
+                {
+                    year++;
+                    month = 1;
+                }
+
+                Console.WriteLine($"На момент {day}.{month}.{year} прирост составит {increment} руб.");
+            }
+        }
+    }
+}
