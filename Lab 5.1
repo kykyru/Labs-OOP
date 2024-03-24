@@ -1,0 +1,75 @@
+using System;
+
+/*
+ Написать метод, входными параметрами которого являются две
+строки. Метод должен возвращать позицию первого вхождения в
+первую строку какого-либо символа из второй строки, либо -1, если
+первая строка не содержит ни одного символа, принадлежащего и
+второй строке.
+ */
+
+namespace Lab_5_1
+{
+    class Program
+    {
+        static int Exersice(string one, string two)
+        {
+            int result = -1;
+
+            for (int i = 0; i < two.Length; i++)
+            {
+                if (result != -1) break;
+
+                for (int j = 0; j < one.Length; j++)
+                {
+                   if (two[i] == one[j])
+                   {
+                        result = j;
+                        break;
+                   }
+                }
+            }
+
+            return result;
+        }
+        static void Main(string[] args)
+        {
+            string name = "Richard", surname = "Stallman";
+            int result = 0;
+
+            Console.WriteLine("Эта программа ищет первый совпавший элемент между первой и второй строкой и возвращает его положение в первой строке. Пример:\n");
+
+            Console.WriteLine($"Первая строка: {name}\nВторая строка: {surname}");
+            Console.WriteLine($"Позиция элемента в первой строке совпадающего с элементом во второй строке: {Exersice(name, surname)}\n");
+
+            name = "David";
+            surname = "Wheeler";
+
+            Exersice(name, surname);
+
+            Console.WriteLine($"Первая строка: {name}\nВторая строка: {surname}");
+            if(Exersice(name, surname) == -1) 
+                Console.WriteLine("Отсутствуют совпадающие элементы");
+
+            Console.Write("Попробуете ввести сами? (Entr - да)");
+
+            while (Console.ReadKey().Key == ConsoleKey.Enter)
+            {
+                Console.Clear();
+
+                Console.Write("Введите первую строку: ");
+                name = Console.ReadLine();
+
+                Console.Write("Введите вторую строку: ");
+                surname = Console.ReadLine();
+
+                result = Exersice(name, surname);
+
+                if(result == -1) Console.WriteLine("Отсутствуют совпадающие элементы");
+                else Console.WriteLine($"Позиция элемента в первой строке совпадающего с элементом во второй строке: {Exersice(name, surname)}\n");
+
+                Console.Write("\n\n\nДля повтора нажмите Enter\nНажмите любую другую клавишу, чтобы выйти...");
+            }
+        }
+    }
+}
